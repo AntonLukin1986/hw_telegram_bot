@@ -5,7 +5,6 @@ venv
 __pycache__
 
 bot_api_guide.py
-awesom_o.py.log*
 hw_status_bot.py.log
 my_account.session
 my_client.py
