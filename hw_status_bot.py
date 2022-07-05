@@ -108,8 +108,7 @@ def parse_status(homework):
 
 def send_message(bot, message):
     """Отправка уведомления в указанный чат."""
-    global last_message
-    global last_message_hw_id
+    global last_message, last_message_hw_id
     if last_message == message and last_message_hw_id == current_hw_id:
         return None
     try:
