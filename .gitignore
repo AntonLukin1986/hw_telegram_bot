@@ -4,7 +4,4 @@ venv
 
 __pycache__
 
-bot_api_guide.py
 hw_status_bot.py.log
-my_account.session
-my_client.py

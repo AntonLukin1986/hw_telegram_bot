@@ -1,6 +1,4 @@
-"""
-Бот для отслеживания статуса домашней роботы Яндекс Практикум.
-"""
+"""Бот для отслеживания статуса домашней роботы Яндекс Практикум."""
 import logging
 import os
 import time
@@ -9,14 +7,15 @@ import requests
 import telegram
 from dotenv import load_dotenv
 
-from hw_exceptions import (BadResponseError, DenialOfServiceError,
-                           MissingVariableError)
+from hw_exceptions import (
+    BadResponseError, DenialOfServiceError, MissingVariableError
+)
 
 load_dotenv()
 
-PRACTICUM_TOKEN = os.getenv('PRACTICUM_TOKEN')
-MY_CHAT_ID = os.getenv('MY_CHAT_ID')
 AWESOM_O_TOKEN = os.getenv('AWESOM_O_TOKEN')
+MY_CHAT_ID = os.getenv('MY_CHAT_ID')
+PRACTICUM_TOKEN = os.getenv('PRACTICUM_TOKEN')
 
 VARIABLE_NAMES = ('PRACTICUM_TOKEN', 'AWESOM_O_TOKEN', 'MY_CHAT_ID')
 
@@ -55,7 +54,7 @@ last_message_hw_id = None
 
 def check_tokens():
     """Проверка наличия необходимых переменных окружения."""
-    missed = [name for name in VARIABLE_NAMES if globals()[name] is None]
+    missed = [name for name in VARIABLE_NAMES if globals().get(name) is None]
     if missed:
         logging.critical(MISSED_VARIABLES.format(missed))
     return not missed
@@ -110,7 +109,7 @@ def send_message(bot, message):
     """Отправка уведомления в указанный чат."""
     global last_message, last_message_hw_id
     if last_message == message and last_message_hw_id == current_hw_id:
-        return None
+        return
     try:
         bot.send_message(
             MY_CHAT_ID, 'Внимание ⚠️ Поступила важная информация 📨'
